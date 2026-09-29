@@ -1,0 +1,63 @@
+{
+  "skill_name": "live-smoke-testing",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "Run a live smoke test against local MySQL and Redis to verify the new alert feature before merging",
+        "top_k": 1
+      },
+      {
+        "prompt": "Verify this service end-to-end against real running dependencies without polluting staging or production",
+        "top_k": 3
+      },
+      {
+        "prompt": "Do an E2E smoke test on the aggregator and broadcaster pipeline using local NATS and Redis",
+        "top_k": 3
+      },
+      {
+        "prompt": "Conduct a live pre-merge verification for the price schedule checks and ensure everything restores cleanly",
+        "top_k": 3
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Write table-driven unit tests with mocks for the new alert helper function",
+        "owner": "test-driven-development"
+      },
+      {
+        "prompt": "Refactor this database query function to make it cleaner",
+        "owner": "code-simplification"
+      },
+      {
+        "prompt": "Audit the repository dependencies for known CVE vulnerabilities",
+        "owner": "security-and-hardening"
+      },
+      {
+        "prompt": "Set up a GitHub Actions pipeline that runs tests on every pull request",
+        "owner": "ci-cd-and-automation"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "kind": "execution",
+      "prompt": "Perform a live smoke test for RWA master price monitoring on local MySQL and Redis. Verify schedule awareness skips closed markets, custom thresholds fire alerts, cooldown throttles duplicates, and restore all state.",
+      "expected_output": "Working tree state snapshotted (via temporary commit if uncommitted changes exist), real service run in background, native Go driver script, live Redis/MySQL state injection, verified log assertions, guaranteed DB/cache restoration, and soft reset rollback of temporary code changes.",
+      "files": [
+        "live-smoke-testing"
+      ],
+      "expectations": [
+        "Snapshots working-tree state before testing (via temporary commit if uncommitted changes exist) and explicitly rolls back via soft reset after testing",
+        "Silences external webhook sinks before starting the background service daemon",
+        "Runs the real service process in the background rather than calling internal private methods directly",
+        "Uses a type-safe Go script to seed test pairs and Redis keys rather than manual bash escaping",
+        "Asserts schedule awareness: pair with closed schedule is bypassed with zero alerts",
+        "Asserts custom policy: stale price fires alert with exact configured threshold and cooldown",
+        "Asserts cooldown throttling: no duplicate alerts within the cooldown window",
+        "Restores modified database pair rows and deletes seeded Redis test keys in a guaranteed defer block",
+        "Generates structured verification evidence table with timestamps and log snippets"
+      ]
+    }
+  ]
+}
