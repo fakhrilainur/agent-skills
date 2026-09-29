@@ -15,7 +15,7 @@ Use `glab` for GitLab work that belongs in the terminal. Keep read-only inspecti
 - Querying or automating a GitLab REST or GraphQL API endpoint with `glab api`.
 - Working with GitLab.com, GitLab Dedicated, or a self-managed GitLab instance.
 
-Do not use this skill for local Git history, branching, commits, or conflicts with no GitLab operation; use `git-workflow-and-versioning` instead. Use `ci-cd-and-automation` when changing pipeline definitions rather than operating an existing pipeline.
+Do not use this skill for local Git history, branching, commits, or conflicts with no GitLab operation; use `git-workflow-and-versioning` instead. When formatting and creating a review-ready GitLab merge request with standardized description templates, touchpoints, and test evidence, follow the `gitlab-mr-create` skill instead. Use `ci-cd-and-automation` when changing pipeline definitions rather than operating an existing pipeline.
 
 ## Process
 
@@ -25,7 +25,7 @@ Do not use this skill for local Git history, branching, commits, or conflicts wi
 
 3. Use the highest-level command that represents the requested GitLab object.
 
-   - Merge requests: inspect with `glab mr list`, `glab mr view`, or `glab mr diff`; create with explicit title, target branch, reviewers, labels, and draft status as appropriate. Treat `glab mr merge` and auto-merge as externally mutating actions requiring confirmation immediately before execution.
+   - Merge requests: inspect with `glab mr list`, `glab mr view`, or `glab mr diff`; create with explicit title, target branch, reviewers, labels, and draft status as appropriate (or follow the `gitlab-mr-create` skill for standardized review templates). Treat `glab mr merge` and auto-merge as externally mutating actions requiring confirmation immediately before execution.
    - Issues: use `glab issue list`, `view`, `create`, `update`, and `note`. Prefer `--description-file` for substantial Markdown and verify templates exist locally before passing `--template`.
    - CI/CD: inspect with `glab ci status`, `view`, or `trace`; retry, cancel, run, trigger, or delete only with an identified pipeline or job and authorization. Use `glab ci lint` before relying on changed CI configuration.
    - Releases: inspect the tag and release first. For a new tag, state the intended ref explicitly with `--ref`; `glab release create <tag>` can otherwise create a tag from the default branch. In CI, do not assign `CI_JOB_TOKEN` to `GITLAB_TOKEN`; enable CI auto-login instead.

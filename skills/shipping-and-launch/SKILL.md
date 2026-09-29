@@ -283,6 +283,8 @@ Every deployment needs a rollback plan before it happens:
 - For performance pre-launch checklist, see `../../references/performance-checklist.md`
 - For accessibility verification before launch, see `../../references/accessibility-checklist.md`
 - For the alerting rules and SLO-tied thresholds, see `observability-and-instrumentation`
+- For pre-merge and pre-launch runtime daemon verification against local dependencies, see `live-smoke-testing`
+- When preparing and publishing review-ready GitLab merge requests, follow the `gitlab-mr-create` skill
 
 ## Common Rationalizations
 

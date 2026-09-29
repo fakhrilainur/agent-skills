@@ -134,6 +134,7 @@ main (always deployable)
 - Keep branches short-lived (merge within 1-3 days) — long-lived branches are hidden costs
 - Delete branches after merge
 - Prefer feature flags over long-lived branches for incomplete features
+- When publishing changes to GitLab, follow the `gitlab-mr-create` skill to generate review-ready descriptions with validation matrices and test evidence.
 
 ### Branch Naming
 

@@ -66,11 +66,13 @@ Regardless of specific technology (PostgreSQL or MySQL; Redis, Dragonfly, or Key
 - When testing time-windowed behaviors (e.g. TTL expiration, cron ticker intervals, quiet-hours bypass).
 - When validating cross-service message propagation (e.g. Producer $\rightarrow$ Message Broker $\rightarrow$ Consumer Worker).
 - When conducting pre-merge verification on data-integrity or event-driven systems where mocks hide concurrency or serialization flaws.
+- When generating deterministic runtime evidence for review-ready GitLab merge requests (see `gitlab-mr-create`) or pre-launch verification (see `shipping-and-launch`).
 
 ## When NOT to Use
 
-- Do not use for testing pure, stateless business logic that can be deterministically tested with table-driven unit tests. Use `test-driven-development` instead.
-- Do not use for investigating unknown system crashes or root-cause reproduction. Use `debugging-and-error-recovery` instead.
+- Do not use for testing pure, stateless business logic that can be deterministically tested with table-driven unit tests. Follow the `test-driven-development` skill instead.
+- Do not use for investigating unknown system crashes or root-cause reproduction. Use the `debugging-and-error-recovery` skill instead.
+- Do not use for frontend or browser-driven UI verification. Use the `browser-testing-with-devtools` skill instead.
 - Do not use directly against shared production or staging environments. Live smoke tests require an isolated local sandbox or dedicated testcontainer.
 
 ---

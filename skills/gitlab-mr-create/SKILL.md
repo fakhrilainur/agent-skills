@@ -11,13 +11,15 @@ Creates review-ready GitLab Merge Requests using the `glab` CLI with standardize
 
 ## When to Use
 
-- Creating, opening, drafting, or publishing a GitLab Merge Request from the current branch.
-- Standardizing MR descriptions to include Lane classification, touchpoints, validation matrix, test evidence, review focus, and rollback plans.
+- Creating, opening, drafting, or publishing a review-ready GitLab Merge Request from the current branch.
+- Standardizing MR descriptions using specs and touchpoints (see `spec-driven-development`).
+- Embedding deterministic test evidence from unit tests (`test-driven-development`) or runtime daemon verification (`live-smoke-testing`).
 - Pre-flight checking an MR before handing off to human/lead review.
 
 ## When NOT to Use
 
-- Local git operations without remote GitLab interaction (use `git-workflow-and-versioning`).
+- Local git operations, branching, or atomic commits without remote GitLab interaction (follow the `git-workflow-and-versioning` skill).
+- Operating non-MR GitLab resources such as pipelines, issues, or releases (see the `glab` skill).
 - Required test evidence or validation scenarios are missing or failing.
 - Working with GitHub repositories (use GitHub PR workflow instead).
 - Creating MR directly from default branches (`main`, `master`, `develop`) without explicit override.
