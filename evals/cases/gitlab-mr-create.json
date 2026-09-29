@@ -1,0 +1,43 @@
+{
+  "skill_name": "gitlab-mr-create",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "Create a GitLab MR from current branch with our standardized description template",
+        "top_k": 1
+      },
+      {
+        "prompt": "Format and publish this branch as a GitLab merge request with standard MR preview",
+        "top_k": 1
+      },
+      {
+        "prompt": "Prepare a review-ready GitLab MR description with test evidence and validation scenarios",
+        "top_k": 1
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Use glab to inspect this GitLab pipeline, then retry the failed deployment job if I approve",
+        "owner": "glab"
+      },
+      {
+        "prompt": "Split the current working tree into a clean series of atomic commits",
+        "owner": "git-workflow-and-versioning"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "kind": "dialogue",
+      "prompt": "Create a GitLab merge request for this branch using glab. Format the description using our standard MR template.",
+      "expected_output": "An MR preview showing title, target branch, standardized description with Lane, Touchpoints, Test Evidence, and command, asking for explicit user confirmation before running glab mr create.",
+      "expectations": [
+        "The agent drafts a standardized MR description containing Summary, Context & Lane, and Test Evidence",
+        "The agent presents an MR preview with the exact glab mr create command before creating the MR",
+        "The agent asks for explicit user confirmation before executing the MR creation command",
+        "No raw secrets or unredacted tokens are included in the description"
+      ]
+    }
+  ]
+}
