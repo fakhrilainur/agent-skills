@@ -64,7 +64,7 @@ Assignee: `<assignee or none>`
 
 ### Command
 ```bash
-glab mr create ...
+glab mr create --source-branch "<source>" --target-branch "<target>" --title "<title>" --description-file /tmp/mr_desc.md
 ```
 
 Create this GitLab MR now? (y/n)
@@ -73,8 +73,10 @@ Create this GitLab MR now? (y/n)
 **Do not proceed unless the user clearly confirms (`y` / `yes`).**
 
 ### 5. Execution & Verification
-1. Run `glab mr create` with explicit `--source-branch`, `--target-branch`, `--title`, and `--description`.
-2. Output resulting MR URL, IID, and status.
+1. Write the finalized MR markdown description to a temporary file (e.g. `/tmp/mr_description.md` or `.git/mr_description.md`). Never interpolate multiline markdown containing backticks or shell symbols directly into inline `-d` string arguments.
+2. Run `glab mr create` with explicit `--source-branch`, `--target-branch`, `--title`, and `--description-file <file-path>`.
+3. Output resulting MR URL, IID, and status.
+4. Delete the temporary description file after the command succeeds or fails.
 
 ## Standardized MR Description Template
 

@@ -3,19 +3,19 @@
   "trigger": {
     "positive": [
       {
-        "prompt": "Run a live smoke test against local MySQL and Redis to verify the new alert feature before merging",
+        "prompt": "Run a live smoke test against local database and cache to verify the new alert feature before merging",
         "top_k": 1
       },
       {
-        "prompt": "Verify this service end-to-end against real running dependencies without polluting staging or production",
+        "prompt": "Verify this background worker service end-to-end against real running dependencies without polluting staging or production",
         "top_k": 3
       },
       {
-        "prompt": "Do an E2E smoke test on the aggregator and broadcaster pipeline using local NATS and Redis",
+        "prompt": "Do an E2E smoke test on the message broker and consumer worker pipeline using local Docker containers",
         "top_k": 3
       },
       {
-        "prompt": "Conduct a live pre-merge verification for the price schedule checks and ensure everything restores cleanly",
+        "prompt": "Conduct a live pre-merge verification for the status transition checks and ensure all state restores cleanly",
         "top_k": 3
       }
     ],
@@ -42,8 +42,8 @@
     {
       "id": 1,
       "kind": "execution",
-      "prompt": "Perform a live smoke test for RWA master price monitoring on local MySQL and Redis. Verify schedule awareness skips closed markets, custom thresholds fire alerts, cooldown throttles duplicates, and restore all state.",
-      "expected_output": "Working tree state snapshotted (via temporary commit if uncommitted changes exist), real service run in background, native Go driver script, live Redis/MySQL state injection, verified log assertions, guaranteed DB/cache restoration, and soft reset rollback of temporary code changes.",
+      "prompt": "Perform a live smoke test for an order expiration worker against local database and message broker. Verify expired orders transition to EXPIRED, duplicate events are throttled by cooldown, and all state restores cleanly.",
+      "expected_output": "Working tree state snapshotted (via temporary commit if uncommitted changes exist), real service run in background, native driver script, live database and cache/broker state injection with namespaced keys, verified log assertions, guaranteed DB/cache restoration in defer/finally block, and soft reset rollback of temporary code changes.",
       "files": [
         "live-smoke-testing"
       ],
@@ -51,11 +51,10 @@
         "Snapshots working-tree state before testing (via temporary commit if uncommitted changes exist) and explicitly rolls back via soft reset after testing",
         "Silences external webhook sinks before starting the background service daemon",
         "Runs the real service process in the background rather than calling internal private methods directly",
-        "Uses a type-safe Go script to seed test pairs and Redis keys rather than manual bash escaping",
-        "Asserts schedule awareness: pair with closed schedule is bypassed with zero alerts",
-        "Asserts custom policy: stale price fires alert with exact configured threshold and cooldown",
-        "Asserts cooldown throttling: no duplicate alerts within the cooldown window",
-        "Restores modified database pair rows and deletes seeded Redis test keys in a guaranteed defer block",
+        "Uses a type-safe native driver script to seed test entities and cache keys rather than manual bash escaping",
+        "Asserts state machine transition: expired record transitions to target status",
+        "Asserts cooldown throttling or deduplication: duplicate events within cooldown window are ignored",
+        "Restores modified database rows and deletes seeded test keys in a guaranteed defer or finally block",
         "Generates structured verification evidence table with timestamps and log snippets"
       ]
     }
