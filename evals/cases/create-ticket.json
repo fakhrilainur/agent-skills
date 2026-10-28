@@ -1,0 +1,47 @@
+{
+  "skill_name": "create-ticket",
+  "trigger": {
+    "positive": [
+      {
+        "prompt": "Draft an executable ticket description with requirement IDs and verification criteria for our new auth endpoint",
+        "top_k": 1
+      },
+      {
+        "prompt": "Create a GitLab issue ticket with testable requirements, boundaries, and definition of done using glab",
+        "top_k": 1
+      },
+      {
+        "prompt": "Update the issue ticket description with explicit edge case requirements and verification rules",
+        "top_k": 1
+      }
+    ],
+    "negative": [
+      {
+        "prompt": "Create a GitLab MR from current branch with our standardized description template",
+        "owner": "gitlab-mr-create"
+      },
+      {
+        "prompt": "Write a complete functional specification for the new billing portal before planning implementation tasks",
+        "owner": "spec-driven-development"
+      },
+      {
+        "prompt": "Use glab to inspect this GitLab pipeline, then retry the failed deployment job if I approve",
+        "owner": "glab"
+      }
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "kind": "dialogue",
+      "prompt": "Draft an issue ticket for adding rate limiting to our public API. Include requirements, boundaries, and verification criteria, and prepare to create the issue using glab.",
+      "expected_output": "An implementation contract ticket preview with stable requirement IDs, testable verification, boundaries, evidence rules, and definition of done, confirming with the user before publishing to GitLab via glab.",
+      "expectations": [
+        "The agent structures the ticket as an implementation contract with Objective, Boundaries, Requirements and Verification, and Definition of Done",
+        "The agent assigns stable requirement IDs with testable behaviors and concrete verification steps",
+        "The agent presents a complete preview of the ticket before creating or updating the issue",
+        "The agent requests user approval before executing any issue creation or mutation command"
+      ]
+    }
+  ]
+}

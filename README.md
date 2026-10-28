@@ -245,6 +245,7 @@ The commands above are entry points. The pack includes 28 skills total — 27 li
 | Skill | What It Does | Use When |
 |-------|-------------|----------|
 | [planning-and-task-breakdown](skills/planning-and-task-breakdown/SKILL.md) | Decompose specs into small, verifiable tasks with acceptance criteria and dependency ordering | You have a spec and need implementable units |
+| [create-ticket](skills/create-ticket/SKILL.md) | Drafts, refines, or updates issue and ticket descriptions as human-readable, AI-executable implementation contracts using glab or gh | Creating or refining issues, tickets, or work-items with requirement IDs and Definition of Done |
 
 ### Build - Write the code
 

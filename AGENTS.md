@@ -33,6 +33,7 @@ The agent should automatically map user intent to skills:
 - Live smoke test / runtime verification → `live-smoke-testing`
 - GitLab MR creation / review-ready MR → `gitlab-mr-create`
 - GitLab CLI operations / pipelines → `glab`
+- Issue / ticket creation or refinement → `create-ticket`
 
 ### Lifecycle Mapping (Implicit Commands)
 
